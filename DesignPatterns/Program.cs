@@ -1,4 +1,4 @@
-namespace DesignPatterns
+namespace DesignPatterns.Api
 {
   public class Program
   {
@@ -17,7 +17,6 @@ namespace DesignPatterns
       app.UseHttpsRedirection();
 
       app.UseAuthorization();
-
 
       app.MapControllers();
 
