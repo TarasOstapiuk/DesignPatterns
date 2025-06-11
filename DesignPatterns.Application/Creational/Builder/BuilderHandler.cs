@@ -7,34 +7,18 @@ namespace DesignPatterns.Application.Creational.Builder
 {
   public class BuilderHandler
   {
-    public string HandlerNonFluentBuilder()
+    public string Handle( string realization )
     {
-      var result = new NotFluentBuilderHandler().Handle();
-      return result;
-    }
-
-    public string HandleAutoFixtureCreation()
-    {
-      var result = new HandlerAutoFixture().HandleFixtureCreating();
-      return result;
-    }
-
-    public string HandleAutoFixtureBuilding()
-    {
-      var result = new HandlerAutoFixture().HandleFixtureBuilding();
-      return result;
-    }
-
-    public string HandleMultiBuilder()
-    {
-      var result = new HandlerMultiFacetedBuilder().Handle();
-      return result;
-    }
-
-    public string GenericFluentBuilderHandler()
-    {
-      var result = new GenericFluentBuilderHandler().Handle();
-      return result;
+      var realizationLowerCase = realization.ToLowerInvariant();
+      return realizationLowerCase switch
+      {
+        "nonfluentbuilder" => new NotFluentBuilderHandler().Handle(),
+        "autofixturecreation" => new HandlerAutoFixture().HandleFixtureCreating(),
+        "autofixturebuilding" => new HandlerAutoFixture().HandleFixtureBuilding(),
+        "automultifacetedbuilder" => new HandlerMultiFacetedBuilder().Handle(),
+        "genericfluentbuilder" => new GenericFluentBuilderHandler().Handle(),
+        _ => throw new Exception( "Not found" )
+      };
     }
   }
 }

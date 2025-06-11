@@ -5,16 +5,15 @@ namespace DesignPatterns.Application.Creational.Prototype
 {
   public class PrototypeHandler
   {
-    public string HandlerCopyCtor()
+    public string Handle(string realization )
     {
-      var result = new CopyCtorHandler().Handle();
-      return result;
-    }
-
-    public string HandleSerializationCoping()
-    {
-      var result = new SerializationCopierHandler().Handle();
-      return result;
+      var realizationLowerCase = realization.ToLower();
+      return realizationLowerCase switch
+      {
+        "copyctor" => new CopyCtorHandler().Handle(),
+        "serializationcoping" => new SerializationCopierHandler().Handle(),
+        _ => throw new Exception( "Not found" )
+      };
     }
   }
 }

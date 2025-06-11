@@ -24,7 +24,7 @@ namespace DesignPatterns.Application.Creational.Prototype.SerializationProto
         || person1.Address.Street == person2.Address.Street
         || person1.Address.City == person2.Address.City;
 
-      return copingFailed ? " CopyCtor failed" : "CopyCtor works fine";
+      return copingFailed ? " Serialization coping failed" : "Serialization coping works fine";
     }
   }
 }

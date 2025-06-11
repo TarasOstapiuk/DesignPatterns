@@ -7,30 +7,23 @@ namespace DesignPatterns.Application.Creational.Singleton
 {
   public class SingletonHandler
   {
+    public string Handle( string realization )
+    {
+      var realizationToLower = realization.ToLower();
+      return realizationToLower switch
+      {
+        "lazysingleton" => HandleSingleton<LazySingleton>(),
+        "lockedsingleton" => HandleSingleton<LockedSingleton>(),
+        "multitone" => new MultiToneHandler().Handle(),
+        "monostate" => new MonoStateHandler().Handle(),
+        _ => throw new Exception( "Not found" )
+      };
+    }
+
     public string HandleLazySingleton() => HandleSingleton<LazySingleton>();
 
     public string HandleLockedSingleton() => HandleSingleton<LockedSingleton>();
 
-    public string HandleMonoState()
-    {
-      var person = new MonostatePerson();
-      person.Name = "Tarasito";
-      person.Age = 18;
-
-      var person2 = new MonostatePerson();
-      return person2.ToString();
-    }
-
-    public string HandleMultiTone()
-    {
-      var person1 = MultiTonePerson.GetPerson( GenderEnum.Male );
-      var person2 = MultiTonePerson.GetPerson( GenderEnum.Female );
-      var person3 = MultiTonePerson.GetPerson( GenderEnum.Male );
-
-      return ReferenceEquals( person1, person3 )
-        ? $"MultiTone created same instance"
-        : $"MultiTone created different instances";
-    }
 
     private string HandleSingleton<TSingleton>()
       where TSingleton : class, IThreadSafeSingleton<TSingleton>
